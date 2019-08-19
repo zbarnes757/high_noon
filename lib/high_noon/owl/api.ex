@@ -10,8 +10,7 @@ defmodule HighNoon.OWL.API do
       {:ok, %HTTPoison.Response{body: body}} ->
         {:ok, Jason.decode!(body)}
 
-      {:error, %HTTPoison.Error{} = err} ->
-        IO.inspect(err)
+      {:error, %HTTPoison.Error{}} ->
         {:error, :failed_request}
     end
   end

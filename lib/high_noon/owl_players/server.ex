@@ -26,7 +26,7 @@ defmodule HighNoon.OWLPlayers.Server do
   end
 
   @impl true
-  def handle_info(:run, state) do
+  def handle_info(:run, _state) do
     Logger.debug(fn -> "[#{__MODULE__}] Starting update player process..." end)
 
     case HighNoon.OWL.API.get_players() do
@@ -53,12 +53,14 @@ defmodule HighNoon.OWLPlayers.Server do
       next_run
       |> DateTime.to_unix(:millisecond)
       |> Kernel.-(DateTime.to_unix(DateTime.utc_now(), :millisecond))
+      |> abs()
 
     Process.send_after(__MODULE__, :run, send_after_time)
   end
 
   defp save_players(all_players) do
-    all_players = Enum.map(all_players, fn %{"id" => id} = player -> %{esports_id: id, data: player} end)
+    all_players =
+      Enum.map(all_players, fn %{"id" => id} = player -> %{esports_id: id, data: player} end)
 
     HighNoon.Repo.insert_all(Players, all_players,
       on_conflict: :replace_all_except_primary_key,

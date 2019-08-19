@@ -42,7 +42,10 @@ defmodule HighNoon.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:jsonapi, "~> 1.2"},
-      {:httpoison, "~> 1.5"}
+      {:httpoison, "~> 1.5"},
+      {:guardian, "~> 1.2"},
+      {:bcrypt_elixir, "~> 2.0"},
+      {:explode, "~> 1.1"}
     ]
   end
 

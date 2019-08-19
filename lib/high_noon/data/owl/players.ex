@@ -1,6 +1,7 @@
 defmodule HighNoon.Data.OWL.Players do
   use Ecto.Schema
   import Ecto.Changeset
+
   @moduledoc """
 
   Example of data field

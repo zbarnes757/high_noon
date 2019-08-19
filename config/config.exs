@@ -26,6 +26,17 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :high_noon, HighNoonWeb.Guardian,
+  issuer: "high_noon",
+  secret_key: "HNFSXWeTPYsq9j+s6pDsbi0tUuOOfrmmkQUQogEIf3ZA468uh9MrlAQ+rTN+9Nmk"
+
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json-api"]
+}
+
+config :jsonapi,
+  field_transformation: :camelize
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
